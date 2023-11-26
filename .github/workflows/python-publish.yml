@@ -30,6 +30,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install build
+    - name: Bump version
+      run: |
+        # Bump version in version.py and setup.py
+        bump2version minor --allow-dirty --no-commit
+        NEW_VERSION=$(cat version.py | grep "__version__" | cut -d'"' -f2)
+        sed -i "s/version='.*'/version='$NEW_VERSION'/" setup.py
+        git add version.py setup.py
+        git commit -m "Bump version to $NEW_VERSION"
+        git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION"
     - name: Build package
       run: python -m build
     - name: Publish package
