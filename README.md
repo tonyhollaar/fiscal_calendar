@@ -1,3 +1,5 @@
+![Fiscal Calendar Logo](fiscal_calendar_logo.png)
+
 # Fiscal Retail Calendar - 4-5-4 week retail calendar
 The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 4-5-5 week schema, 
 accommodating a 53rd week every 5 or 6 years, contingent on leap years (i.e., an additional day). 
