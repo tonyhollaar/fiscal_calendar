@@ -16,7 +16,7 @@ Currently successfully tested with start-date assumption of 364 days in first ye
 ## Installation
 You can install the package using pip:
 ```bash
-pip install retail-fiscal-calendar
+pip install fiscal-calendar
 ```
 
 ## Usage
