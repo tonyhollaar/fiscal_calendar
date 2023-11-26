@@ -26,6 +26,11 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: '3.x'
+
+    - name: Set Git user identity
+      run: |
+        git config --global user.email "thollaar@gmail.com.com"
+        git config --global user.name "tonyhollaar"
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
