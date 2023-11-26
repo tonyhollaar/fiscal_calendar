@@ -13,7 +13,7 @@ setup(
     author='Tony Hollaar',
     author_email='thollaar@gmail.com',
     url='https://github.com/tonyhollaar/fiscal_calendar',
-    download_url='https://github.com/tonyhollaar/fiscal_calendar/archive/refs/tags/initial_release.tar.gz',
+    download_url='https://github.com/tonyhollaar/fiscal_calendar/archive/refs/tags/v0.0.1.tar.gz',
     packages=find_packages(),
     install_requires=[
         'pandas>=1.0.0',
