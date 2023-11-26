@@ -75,6 +75,7 @@ from datetime import timedelta
 import numpy as np
 import calendar
 
+
 class FiscalCalendarGenerator:
     def __init__(self, start_date, end_date):
         self.start_date = start_date
