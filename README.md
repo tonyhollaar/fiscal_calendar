@@ -1,4 +1,6 @@
-![Fiscal Calendar Logo](fiscal_calendar_logo.png)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/main/fiscal_calendar_logo.png"><br>
+</div>
 
 # Fiscal Retail Calendar - 4-5-4 week retail calendar
 The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 4-5-5 week schema, 
