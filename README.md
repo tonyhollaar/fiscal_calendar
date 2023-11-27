@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/main/fiscal_calendar_logo.svg"><br>
+  <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/fiscal_calendar_logo.svg"><br>
 </div>
 
 # Fiscal Retail Calendar - 4-5-4 week retail calendar
