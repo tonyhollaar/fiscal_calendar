@@ -6,6 +6,23 @@
   <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/fiscal_calendar_logo.svg"><br>
 </div>
 
+# Table of Contents
+
+- [Getting Started](#getting-started)
+- [Fiscal Retail Calendar - 4-5-4 week retail calendar](#fiscal-retail-calendar---4-5-4-week-retail-calendar)
+  - [Description](#description)
+  - [Installation](#installation)
+  - [Usage](#usage)
+- [Key Features](#key-features)
+- [Reference Materials](#reference-materials)
+- [Data Dictionary](#data-dictionary)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+# Getting Started
+
+Welcome to Fiscal Retail Calendar! This section will guide you through the basic steps to get started with the package.
+
 # Fiscal Retail Calendar - 4-5-4 week retail calendar
 The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 4-5-5 week schema, 
 accommodating a 53rd week every 5 or 6 years, contingent on leap years (i.e., an additional day). 
@@ -44,11 +61,12 @@ print(df_fiscal_calendar)
 df_fiscal_calendar.to_csv('fiscal_calendar_old.csv', index=False)
 ```
 
-## Features
-Dynamic Start and End Dates: The fiscal calendar can be generated with dynamic start and end dates.
-Dataframe Output: The calendar is returned as a pandas DataFrame for easy integration into your data pipeline.
-Leap Year Handling: The package takes leap years into account and adjusts for the discrepancy in the number of days.
+# Key Features
 
+- Dynamic Start and End Dates
+- Dataframe Output for easy integration
+- Leap Year Handling
+- 
 ## Reference Materials:
 - [Wikipedia 4–4–5 calendar](https://en.wikipedia.org/wiki/4%E2%80%934%E2%80%935_calendar)
 - [National Retail Federation (NFR)](https://nrf.com/resources/4-5-4-calendar)
