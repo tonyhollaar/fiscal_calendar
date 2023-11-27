@@ -1,3 +1,7 @@
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Python: 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![PyPI Version](https://img.shields.io/pypi/v/fiscal-calendar.svg)
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/fiscal_calendar_logo.svg"><br>
 </div>
@@ -7,7 +11,7 @@ The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 
 accommodating a 53rd week every 5 or 6 years, contingent on leap years (i.e., an additional day). 
 In this fiscal calendar, we assume 364 days in a standard year or 371 days in a leap year with a 53rd week.
 
-# Notes
+## Description
 - With a 53rd week (e.g., 4-5-5 calendar if applicable), 
 exemplified in years such as 2006, 2012, 2017, 2023 (totaling 371 days), the code also considers leap years. 
 The 53rd week adjusts for the fact that each fiscal year comprises 364 days versus the standard ~365 days. 
