@@ -4,7 +4,7 @@
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/fiscal_calendar_logo.svg"><br>
-  <img src="https://github.com/tonyhollaar/fiscal_calendar/blob/master/img_fiscal_calendar.jpg?raw=true" width="60%" height="60%"><br>
+  <img src="https://github.com/tonyhollaar/fiscal_calendar/blob/master/img_fiscal_calendar.jpg?raw=true" width="70%" height="70%"><br>
 </div>
 
 # Table of Contents
