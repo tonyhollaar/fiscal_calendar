@@ -4,31 +4,30 @@
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/fiscal_calendar_logo.svg"><br>
+  <img src="https://github.com/tonyhollaar/fiscal_calendar/blob/master/img_fiscal_calendar.jpg?raw=true"><br>
 </div>
 
 # Table of Contents
 
 - [Getting Started](#getting-started)
 - [Fiscal Retail Calendar - 4-5-4 week retail calendar](#fiscal-retail-calendar---4-5-4-week-retail-calendar)
-  - [Description](#description)
-  - [Installation](#installation)
-  - [Usage](#usage)
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Key Features](#key-features)
 - [Reference Materials](#reference-materials)
 - [Data Dictionary](#data-dictionary)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
-# Getting Started
-
+## Getting Started
 Welcome to Fiscal Retail Calendar! This section will guide you through the basic steps to get started with the package.
 
-# Fiscal Retail Calendar - 4-5-4 week retail calendar
+## Description
 The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 4-5-5 week schema, 
 accommodating a 53rd week every 5 or 6 years, contingent on leap years (i.e., an additional day). 
 In this fiscal calendar, we assume 364 days in a standard year or 371 days in a leap year with a 53rd week.
 
-## Description
 - With a 53rd week (e.g., 4-5-5 calendar if applicable), 
 exemplified in years such as 2006, 2012, 2017, 2023 (totaling 371 days), the code also considers leap years. 
 The 53rd week adjusts for the fact that each fiscal year comprises 364 days versus the standard ~365 days. 
@@ -61,7 +60,7 @@ print(df_fiscal_calendar)
 df_fiscal_calendar.to_csv('fiscal_calendar_old.csv', index=False)
 ```
 
-# Key Features
+## Key Features
 
 - Dynamic Start and End Dates
 - Dataframe Output for easy integration
