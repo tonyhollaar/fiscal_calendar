@@ -1,82 +1,38 @@
 # -*- coding: utf-8 -*-
-"""Fiscal Calendar
-
-# Create Fiscal Calendar - 4-5-4 week retail calendar dynamic start/end-dates** **Goal:** Create Retail Calendar
-which is based on the 4-5-4 week schema and 4-5-5 week schema in case of a 53rd week every 5 or 6 years (dependent on
-leap year e.g. additional day) e.g. fiscal calendar assumes 364 days in a year or 371 days in a year with 53rd week.
-
-Note1: with 53rd week e.g. 4-5-5 calendar if applicable -> for example years: 2006, 2012, 2017,
-2023 all have 53rd week e.g. 371 days. <br> Additionally code takes leap years into account. <br> 53rd week adjusts
-for fact each fiscal year has 364 days versus ~365 days in year. Therefore every next year's fiscal start date is
-starting -1 day earlier or -2 if leap year. To adjust for the discrepency an additional week (+7 days) is added if
-fiscal year end date is before e.g. 28th of jan which is >-4 days from 01-31-year. Conn's fiscal year ends on last
-saturday of fiscal month and new fiscal start date starts sunday.
-
-<br> **Note2:** Fiscal calendar below can be set with dynamic start-date and end-date.
-Currently successfully tested with start-date assumption of 364 days in first year up to dynamic end-date.
-
-<br> **Reference Materials:**
-- https://en.wikipedia.org/wiki/4%E2%80%934%E2%80%935_calendar
-- https://nrf.com/resources/4-5-4-calendar
-
-DATA DICTIONARY
-
-| #  | Name                                     | Definition                                                                                                                                                                                | Data Type | Possible Values                                                                                                   |
-|----|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------|
-| 1  | time_day_id_pk                           | Primary key of date in format yyyymmdd, e.g., 20220130                                                                                                                                    | object    | <yyyymmdd>                                                                                                        |
-| 2  | day_date                                 | Date in format m/d/yyyy, e.g., 1/30/2022                                                                                                                                                  |           | <m/d/yyyy>                                                                                                        |
-| 3  | day_of_week_short_name                   | 3-letter weekday capitalized, e.g., SUN for Sunday                                                                                                                                        |           | <SUN, MON, TUE, WED, THU, FRI, SAT>                                                                               |
-| 4  | day_of_week_name                         | Day of the week name capitalized, e.g., SUNDAY                                                                                                                                            |           | <SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY>                                                  |
-| 5  | day_of_week_letter                       | Unique day of the week letter, e.g., U for Sunday, S for Saturday, H for Thursday etc.                                                                                                    |           | <U, M, T, W, H, F, S> *Sunday = U, Monday = M, Tuesday = T, Wednesday = W, Thursday = H, Friday = F, Saturday = S |
-| 6  | fiscal_day_of_week                       | Fiscal day of the week with Sunday equal to 1 up to Saturday equal to 7                                                                                                                   |           | <1, 2, 3, 4, 5, 6, 7 > *Sunday=1, Monday=2, Tuesday=3, Wednesday=4, Thursday=5, Friday=6, Saturday=7              |
-| 7  | fiscal_week_of_year                      | Fiscal week of the fiscal year number with either every week in the year numbered 1 through 52 or 1 through 53 (if 53rd week in the year)                                                 |           | <1, 2, 3…52, 53>                                                                                                  |
-| 8  | fiscal_week_of_season                    | Fiscal week of the season with every year divided into two seasons. Each week of the season is numbered 1 through 26 weeks or 1 through 27 weeks (if 53rd week in the year)               |           | <1, 2, 3…26, 27>                                                                                                  |
-| 9  | fiscal_week_of_quarter                   | Fiscal week of the fiscal quarter with every year divided into four quarters. Each week of the quarter is numbered 1 through 13 weeks or 1 through 14 weeks (if 53rd week in the year)    |           | <1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14>                                                                   |
-| 10 | fiscal_week_of_month                     | Fiscal week of the fiscal month with every month having either 4 weeks or 5 weeks based on the 4-5-4 schema and 4-5-5 schema if 53rd week                                                 |           | <4, 5>                                                                                                            |
-| 11 | fiscal_week_start_date                   | Fiscal week start date of every fiscal week in format m/d/yyyy, e.g., 1/29/2023                                                                                                           |           | <m/d/yyyy>                                                                                                        |
-| 12 | fiscal_week_end_date                     | Fiscal week end date of every fiscal week, e.g., 2/4/2023                                                                                                                                 |           | <m/d/yyyy>                                                                                                        |
-| 13 | fiscal_week_iso_code                     | Fiscal week ISO code of every fiscal week, e.g., 2005W01                                                                                                                                  |           | <yyyy><'W'><ww>                                                                                                   |
-| 14 | fiscal_month_of_year                     | Fiscal month of the fiscal year with each month numbered 1 through 12 for every fiscal year                                                                                               |           | <1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12>                                                                           |
-| 15 | fiscal_month_of_season                   | Fiscal month of the fiscal season. Each year has two seasons with 6 months each, numbered 1 through 6                                                                                     |           | <1, 2, 3, 4, 5, 6>                                                                                                |
-| 16 | fiscal_month_of_quarter                  | Fiscal month of the fiscal quarter. Each fiscal quarter has 3 months, and fiscal month numbered 1 through 3                                                                               |           | <1, 2, 3>                                                                                                         |
-| 17 | fiscal_month_name                        | Fiscal month name with the first letter capitalized of each of the 12 fiscal months names, e.g., February                                                                                 |           | <January, February, March, April, May, June, July, August, September, October, November, December>                |
-| 18 | fiscal_month_short_name                  | Fiscal month short name of the first 3 letters of the month name and the first letter capitalized for the 12 fiscal months in the year, e.g., Feb                                         |           | <Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep>                                                                     |
-| 19 | fiscal_month_start_date                  | Fiscal month start date - return for fiscal_month_of_year its respective fiscal month start date in format 1/29/2023                                                                      |           | <m/d/yyyy>                                                                                                        |
-| 20 | fiscal_month_end_date                    | Fiscal month end date - return for fiscal_month_of_year its respective fiscal month end date in format 2/25/2023                                                                          |           | <m/d/yyyy>                                                                                                        |
-| 21 | fiscal_month_number_of_weeks             | Fiscal month number of weeks - either 4 or 5 weeks in a fiscal month based on the 4-5-4 week or 4-5-5 weeks schema if 53rd week                                                           |           | <4, 5>                                                                                                            |
-| 22 | fiscal_month_number_of_days              | Fiscal month number of days - either 28 days or 35 days in a fiscal month                                                                                                                 |           | <28, 35>                                                                                                          |
-| 23 | fiscal_quarter_of_year                   | Fiscal quarter of the fiscal year in format <'Q'+fiscal quarter number> e.g., with every quarter being labelled as Q1,…,Q4                                                                |           | <Q1, Q2, Q3, Q4>                                                                                                  |
-| 24 | fiscal_quarter_of_year_str               | Fiscal quarter of the fiscal year as a string, e.g., 'Q1'                                                                                                                                 |           | <Q1, Q2, Q3, Q4>                                                                                                  |
-| 25 | fiscal_quarter_of_season                 | Fiscal quarter of the fiscal season - equal to 1 IF 1st OR 3rd fiscal quarter of the year ELSE equal to 2 IF 2nd OR 4th fiscal quarter of the year                                        |           | <1, 2>                                                                                                            |
-| 26 | fiscal_season_of_year                    | Fiscal season of the year - equal to 1 IF 1st or 2nd fiscal quarter of the year ELSE equal to 2 IF 3rd or 4th fiscal quarter of the year                                                  |           | <1, 2>                                                                                                            |
-| 27 | fiscal_season_name                       | Fiscal season name - equal to SPRING IF fiscal_season_of_year = 1 ELSE equal to FALL if fiscal_season_of_year = 2                                                                         |           | <SPRING, FALL>                                                                                                    |
-| 28 | fiscal_year                              | Fiscal year - running from fiscal start date to fiscal end date for each year starting on the last Sunday (unless 53rd week +7days) of the month January up to the last Saturday of January, e.g., 2022 |           | <yyyy>                                                                                              |
-| 29 | fiscal_year_2_digit                      | Fiscal year 2 digits - last 2 out of 4 characters of fiscal year in yyyy format, e.g., fiscal year: 2022 becomes fiscal_year_2_digit: 22                                                  |           | <yy>                                                                                                              |
-| 30 | fiscal_year_start_date                   | Fiscal year start date - return for fiscal_year its respective fiscal year start date in format 1/30/2022                                                                                 |           | <m/d/yyyy>                                                                                                        |
-| 31 | fiscal_year_end_date                     | Fiscal year end date - return for fiscal_year its respective fiscal year end date in format 1/28/2023                                                                                     |           | <m/d/yyyy>                                                                                                        |
-| 32 | fiscal_year_number_of_weeks              | Fiscal year number of weeks - either 52 or 53 weeks in a fiscal year based on whether there is a 53rd week in the year                                                                    |           | <52, 53>                                                                                                          |
-| 33 | fiscal_year_number_of_days               | Fiscal year number of days - either 364 days or 371 days in a fiscal year                                                                                                                 |           | <364, 371>                                                                                                        |
-| 34 | last_year_equiv_day_fk                   | Last year equivalent day foreign key - day_date date minus 364 days to retrieve the date from last year for comparison purposes, e.g., 20220130                                           |           | <yyyymmdd>                                                                                                        |
-| 35 | last_year_equiv_week_fk                  | Last year equivalent fiscal week foreign key - lookup for the last year equivalent date (current day_date-364 days) and return the respective fiscal week, e.g., 2022W01                  |           | <yyyy><'W'><ww>                                                                                                   |
-| 36 | last_year_equiv_day_date                 | Last year equivalent day date - return for the last_year_equiv_day_fk its respective date in format 1/30/2022                                                                             |           | <m/d/yyyy>                                                                                                        |
-| 37 | last_year_fiscal_year                    | Last year fiscal year - return for the last_year_equiv_day_fk its respective fiscal year in format 2022                                                                                   |           | <yyyy>                                                                                                            |
-| 38 | last_year_fiscal_month_of_year           | Last year fiscal month of the fiscal year - return for the last_year_equiv_day_fk its respective fiscal month of the year in format 1-12                                                  |           | <1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12>                                                                           |
-| 39 | prior_year_from_last_year_equiv_day_fk   | Prior year from the last year equivalent day foreign key - day_date date minus 730 days to retrieve the date from two years ago for comparison purposes, e.g., 20200130                   |           | <yyyymmdd>                                                                                                        |
-| 40 | prior_year_from_last_year_equiv_day_date | Prior year from the last year equivalent day date - return for the prior_year_from_last_year_equiv_day_fk its respective date in format 1/30/2020                                         |           | <m/d/yyyy>                                                                                                        |
-| 41 | time_fiscal_week_id_fk                   | Fiscal week ID foreign key - fiscal week ISO code of every fiscal week, e.g., 2005W01.  note:                                                                                             |           | <yyyy><'W'><ww>                                                                                                   |
-| 42 | first_fiscal_week_of_fiscal_month_ind   | First fiscal week of the fiscal month indicator - equal to 1 IF fiscal_week_of_month = 1 ELSE equal to 0                                                                                   |           | <0, 1>                                                                                                            |
-| 43 | last_fiscal_week_of_fiscal_month_ind    | Last fiscal week of the fiscal month indicator - equal to 1 IF fiscal_week_of_month = fiscal_month_number_of_weeks ELSE equal to 0                                                         |           | <0, 1>                                                                                                            |
-| 44 | time_day_id_pk_int                       | Integer representation of time_day_id_pk, e.g., 20220130 is represented as 20220130                                                                                                       | int       | <integer value>                                                                                                   |
-"""
-
 import pandas as pd
 from datetime import datetime
 from datetime import timedelta
 import numpy as np
 import calendar
+from tabulate import tabulate
 
 
 class FiscalCalendarGenerator:
+    """
+    FiscalCalendarGenerator is a class for generating and managing fiscal calendar information.
+
+    Attributes:
+    - start_date (str): The start date of the fiscal calendar in the format 'yyyy-mm-dd'.
+    - end_date (str): The end date of the fiscal calendar in the format 'yyyy-mm-dd'.
+
+    Methods:
+    - create_dataframe(): Generates the fiscal calendar and returns it as a DataFrame.
+
+    Usage:
+        from fiscal_calendar import FiscalCalendarGenerator
+
+        # Instantiate the FiscalCalendarGenerator class
+        fiscal_calendar_generator = FiscalCalendarGenerator(start_date='2021-01-31', end_date='2031-01-04')
+
+        # Generate the fiscal calendar
+        df_fiscal_calendar = fiscal_calendar_generator.create_dataframe()
+
+        # Print the DataFrame
+        print(df_fiscal_calendar)
+
+        # Save the DataFrame to a CSV file
+        df_fiscal_calendar.to_csv('fiscal_calendar_old.csv', index=False)
+    """
     def __init__(self, start_date, end_date):
         self.start_date = start_date
         self.end_date = end_date
@@ -97,6 +53,154 @@ class FiscalCalendarGenerator:
         self.lst_years = []
         self.lst_week_months = []
         self.fiscal_start_date = None
+
+    def print_fiscal_calendar(self, df_fiscal_calendar: pd.DataFrame, columns: int = 3, week_number: bool = False,
+                              year: int = None):
+        """
+        Prints a fiscal calendar based on the provided DataFrame.
+
+        Parameters:
+            - df_fiscal_calendar (pd.DataFrame): DataFrame containing fiscal calendar data.
+            - rows (int): Number of rows in the grid layout for printed calendars (default is 4).
+            - columns (int): Number of columns in the grid layout for printed calendars (default is 3).
+            - week_number (bool): If True, includes week numbers in the printed calendar (default is False).
+
+        Prints a grid of fiscal calendars, arranged in rows and columns. Each calendar includes the month name,
+        fiscal year, and a calendar grid with days of the week. If week_number is True, each day in the calendar
+        includes its corresponding fiscal week number.
+
+        Note: The function assumes that the DataFrame (df_fiscal_calendar) contains the following columns:
+        'fiscal_year', 'fiscal_month_of_year', 'fiscal_month_name', 'day_date', 'day_of_week_short_name',
+        'fiscal_day_of_week', and 'fiscal_week_of_year'.
+
+        Args:
+            df_fiscal_calendar (pd.DataFrame): DataFrame containing fiscal calendar data.
+            rows (int, optional): Number of rows in the grid layout for printed calendars (default is 4).
+            columns (int, optional): Number of columns in the grid layout for printed calendars (default is 3).
+            week_number (bool, optional): If True, includes week numbers in the printed calendar (default is False).
+
+        Returns:
+            None
+
+        Example:
+        ```python
+        from fiscal_calendar import FiscalCalendarGenerator
+
+        fiscal_calendar_generator = FiscalCalendarGenerator(start_date='2021-01-31', end_date='2025-02-01')
+
+        # Generate the fiscal calendar
+        df_fiscal_calendar = fiscal_calendar_generator.create_dataframe()
+
+        # Print the fiscal calendar for the year 2022 without week numbers in a 6-column layout
+        fiscal_calendar_generator.print_fiscal_calendar(df_fiscal_calendar, columns=6, week_number=False, year=2022)
+        ```
+        """
+        if year is not None:
+            fiscal_years = [str(year)]
+        else:
+            fiscal_years = df_fiscal_calendar['fiscal_year'].unique()
+
+        # Create a mapping dictionary
+        day_of_week_mapping = {'SUN': 'Su', 'MON': 'Mo', 'TUE': 'Tu', 'WED': 'We', 'THU': 'Th', 'FRI': 'Fr',
+                               'SAT': 'Sa'}
+
+        for fiscal_year in fiscal_years:
+            fiscal_year_data = df_fiscal_calendar[df_fiscal_calendar['fiscal_year'] == fiscal_year]
+
+            formatted_months = []
+            for fiscal_month in range(1, 13):
+                fiscal_month_data = fiscal_year_data[fiscal_year_data['fiscal_month_of_year'] == fiscal_month]
+
+                if not fiscal_month_data.empty:
+                    fiscal_month_name = fiscal_month_data['fiscal_month_name'].iloc[0]
+                    month_str = f"{fiscal_month_name} FY{fiscal_year}\n"
+                    month_str += "Su Mo Tu We Th Fr Sa\n" if not week_number else "W | Su Mo Tu We Th Fr Sa\n"
+
+                    # Create a list to represent the calendar
+                    calendar = [['  '] * 7 for _ in range(6)]  # Add an extra column for the week number if needed
+                    week_numbers = ['  '] * 6
+
+                    # Sort fiscal_month_data based on day_date
+                    fiscal_month_data = fiscal_month_data.sort_values('day_date')
+
+                    # Get the minimum fiscal_week_of_year for the current month
+                    min_week_of_year = fiscal_month_data['fiscal_week_of_year'].min()
+
+                    for _, day_data in fiscal_month_data.iterrows():
+                        day_date = datetime.strptime(day_data['day_date'], '%m/%d/%Y')
+                        day_str = f"{day_date.day:2d}"
+                        day_of_week = day_data['day_of_week_short_name'].upper()  # Convert to uppercase
+
+                        # Map the day of the week to the desired format
+                        day_of_week = day_of_week_mapping.get(day_of_week, '  ')  # Use '  ' if not found in the mapping
+
+                        # Use the day index from the dataframe, subtract 1 because Python uses 0-based indexing
+                        day_index = day_data['fiscal_day_of_week'] - 1
+
+                        # Use the fiscal_week_of_year from the dataframe, adjust it to fit within the range of the calendar list
+                        week_num = day_data['fiscal_week_of_year'] - min_week_of_year
+
+                        # Fill the calendar array
+                        calendar[week_num][day_index] = day_str
+
+                        # Store the week number for each day
+                        if week_number:
+                            week_numbers[week_num] = str(day_data['fiscal_week_of_year'])
+
+                    # Add the calendar to the month string
+                    for week_num, week in enumerate(calendar):
+                        week_line = " ".join(day_str if day_str != '  ' else "    " for day_str in week)
+                        if week_line.strip():  # Only add the line if it's not empty
+                            if week_number:
+                                month_str += f"{week_numbers[week_num]} | " + week_line + "\n"
+                            else:
+                                month_str += week_line + "\n"
+
+                    # Add the month string to the list of formatted months
+                    formatted_months.append(month_str)
+
+            # Print the months in a grid format
+            for i in range(0, len(formatted_months), columns):
+                # Split each month string into lines
+                split_months = [month.split("\n") for month in formatted_months[i:i + columns]]
+
+                # Get the maximum number of lines
+                max_lines = max(len(split_month) for split_month in split_months)
+
+                # Print the corresponding lines from each month side by side
+                for j in range(max_lines):
+                    for split_month in split_months:
+                        print(split_month[j].ljust(28) if j < len(split_month) else "".ljust(28), end="   ")
+                    print()
+                print()  # Add a single newline between each row of months
+    def pretty_print_year(self, df_date, year):
+        """
+        Pretty print the fiscal calendar for a specific year.
+
+        Parameters:
+        - df_date (pd.DataFrame): The DataFrame containing the fiscal calendar.
+        - year (int): The fiscal year to pretty print.
+
+        Usage:
+            fiscal_calendar_generator.pretty_print_year(2022, df_fiscal_calendar)
+        """
+        fiscal_year_data = df_date[df_date['fiscal_year'] == str(year)]  # Assuming 'fiscal_year' is a string
+        formatted_data = fiscal_year_data[[
+            'time_day_id_pk', 'day_date', 'day_of_week_short_name', 'day_of_week_name', 'day_of_week_letter',
+            'fiscal_day_of_week', 'fiscal_week_of_year', 'fiscal_week_of_season', 'fiscal_week_of_quarter',
+            'fiscal_week_of_month', 'fiscal_week_start_date', 'fiscal_week_end_date', 'fiscal_week_iso_code',
+            'fiscal_month_of_year', 'fiscal_month_of_season', 'fiscal_month_of_quarter', 'fiscal_month_name',
+            'fiscal_month_short_name', 'fiscal_month_start_date', 'fiscal_month_end_date', 'fiscal_month_number_of_weeks',
+            'fiscal_month_number_of_days', 'fiscal_quarter_of_year', 'fiscal_quarter_of_year_str', 'fiscal_quarter_of_season',
+            'fiscal_season_of_year', 'fiscal_season_name', 'fiscal_year', 'fiscal_year_2_digit', 'fiscal_year_start_date',
+            'fiscal_year_end_date', 'fiscal_year_number_of_weeks', 'fiscal_year_number_of_days', 'last_year_equiv_day_fk',
+            'last_year_equiv_week_fk', 'last_year_equiv_day_date', 'last_year_fiscal_year', 'last_year_fiscal_month_of_year',
+            'prior_year_from_last_year_equiv_day_fk', 'prior_year_from_last_year_equiv_day_date', 'time_fiscal_week_id_fk',
+            'first_fiscal_week_of_fiscal_month_ind', 'last_fiscal_week_of_fiscal_month_ind', 'time_day_id_pk_int'
+        ]]
+
+        # Convert the DataFrame to a tabular format for pretty printing
+        print(tabulate(formatted_data, headers='keys', tablefmt='pretty'))
 
     def check_and_shift_start_date(self):
         """
