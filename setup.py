@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='fiscal_calendar',
-    version='0.2.7',
+    version='0.2.8',
     license='MIT',
     description='Fiscal Retail Calendar - 4-5-4 week retail calendar',
     long_description=long_description,
