@@ -719,6 +719,7 @@ class FiscalCalendarGenerator:
             if fiscal_year_counts.iloc[daysyear] == 364:
                 lst_week_month = lst_week_month
             #elif fiscal_year_counts.iloc[daysyear] == 366:
+            # was logical error with 2024 leapyear due to additional week
             elif fiscal_year_counts.iloc[daysyear] == 371:
                 lst_week_month = np.append(lst_week_month, (list(np.arange(4, 5) + 1) * 7))
             else:
