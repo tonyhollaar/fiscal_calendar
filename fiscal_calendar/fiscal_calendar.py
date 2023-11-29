@@ -718,7 +718,8 @@ class FiscalCalendarGenerator:
 
             if fiscal_year_counts.iloc[daysyear] == 364:
                 lst_week_month = lst_week_month
-            elif fiscal_year_counts.iloc[daysyear] == 366:
+            #elif fiscal_year_counts.iloc[daysyear] == 366:
+            elif fiscal_year_counts.iloc[daysyear] == 371:
                 lst_week_month = np.append(lst_week_month, (list(np.arange(4, 5) + 1) * 7))
             else:
                 pass
@@ -917,18 +918,7 @@ class FiscalCalendarGenerator:
         return df_date
 
     def add_last_year_fiscal_year(self, df_date):
-        # Convert 'Fiscal Year' to numeric
-        df_date['Fiscal Year'] = pd.to_numeric(df_date['Fiscal Year'], errors='coerce')
-
-        # Assuming 'Fiscal Year' is the column containing the fiscal year
-        df_date['last_year_fiscal_year'] = df_date['Fiscal Year'] - 1
-
-        # Check for leap year
-        is_leap_year = pd.to_datetime(df_date['Date']).dt.is_leap_year
-
-        # Adjust for leap year
-        df_date.loc[is_leap_year, 'last_year_fiscal_year'] = df_date['last_year_fiscal_year'] - 1
-
+        df_date['last_year_fiscal_year'] = df_date['fiscal_year'].apply(lambda x: int(x) - 1)
         return df_date
 
     def add_last_year_fiscal_month_of_year(self, df_date):
