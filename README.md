@@ -546,7 +546,7 @@ W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We T
 ```                                                                                          
 
 ### 3.Example Output of method: .save_fiscal_calendar_to_pdf()
-![]()
+![Example Output](https://github.com/tonyhollaar/fiscal_calendar/blob/master/example_fiscal_calendar_pdf.png?raw=true)
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
