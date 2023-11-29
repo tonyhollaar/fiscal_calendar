@@ -18,6 +18,7 @@ setup(
     install_requires=[
         'pandas>=1.0.0',
         'numpy>=1.18.0',
+        'reportlab>=3.5.0',
     ],
     keywords=['pypi', 'python',  'fiscal calendar', '4-4-5 calendar', '4-5-4 calendar', 'retail calendar', 'fiscal retail calendar', 'fiscal retail calendar generator', 'fiscal retail calendar generator python', 'fiscal retail calendar generator python package', 'fiscal retail calendar generator python package pypi', 'fiscal retail calendar generator python package pypi package', 'fiscal retail calendar generator python package pypi package 4-4-5', 'fiscal retail calendar generator python package pypi package 4-5-4', 'fiscal retail calendar generator python package pypi package 4-4-5 calendar', 'fiscal retail calendar generator python package pypi package 4-5-4 calendar', 'fiscal retail calendar generator python package pypi package retail calendar', 'fiscal retail calendar generator python package pypi package fiscal retail calendar', 'fiscal retail calendar generator python package pypi package fiscal retail calendar generator'],
     classifiers=[

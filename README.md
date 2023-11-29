@@ -1,6 +1,12 @@
+![PyPI Version](https://img.shields.io/pypi/v/fiscal-calendar.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Python: 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![PyPI Version](https://img.shields.io/pypi/v/fiscal-calendar.svg)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/fiscal-calendar)
+![GitHub last commit](https://img.shields.io/github/last-commit/tonyhollaar/fiscal_calendar)
+![GitHub issues](https://img.shields.io/github/issues/tonyhollaar/fiscal_calendar)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/tonyhollaar/fiscal_calendar)
+![GitHub contributors](https://img.shields.io/github/contributors/tonyhollaar/fiscal_calendar)
+![GitHub Repo stars](https://img.shields.io/github/stars/tonyhollaar/fiscal_calendar?style=social)
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/fiscal_calendar_logo.svg"><br>
@@ -37,7 +43,9 @@ To rectify this, an additional week (+7 days) is added if the fiscal year-end da
 Currently successfully tested with start-date assumption of 364 days in first year up to dynamic end-date.
 
 ## Installation
+
 You can install the package using pip:
+
 ```bash
 pip install fiscal_calendar
 ```
@@ -46,20 +54,25 @@ pip install fiscal_calendar
 ```python
 from fiscal_calendar import FiscalCalendarGenerator
 
-# Create a fiscal calendar generator object
-fiscal_calendar_generator = FiscalCalendarGenerator(start_date='2021-01-31', end_date='2025-02-01')
+# Example: Create a fiscal calendar generator object for the fiscal year 2021 up to fiscal year 2024
+fc = FiscalCalendarGenerator(start_date='2021-01-31', end_date='2025-02-01')
 
-# Generate the fiscal calendar
-df_fiscal_calendar = fiscal_calendar_generator.create_dataframe()
-
-# Pretty print the fiscal calendar for the year 2022
-fiscal_calendar_generator.pretty_print_year(df_date=df_fiscal_calendar, year=2024)
-
-# Print the fiscal calendar for the year 2022
-fiscal_calendar_generator.print_fiscal_calendar(df_fiscal_calendar, columns=6, week_number=False, year=2022)
+# Generate the fiscal calendar DataFrame
+df = fc.create_dataframe()
 
 # Save the DataFrame to a CSV file
-df_fiscal_calendar.to_csv('fiscal_calendar_old.csv', index=False)
+df.to_csv('fiscal_calendar.csv', index=False)
+
+# Pretty print the fiscal calendar for the year 2024
+fc.pretty_print_year(df_date=df, year=2024)
+
+# Print the fiscal calendar for the year 2024
+fiscal_calendar = fc.print_fiscal_calendar(df, columns=3, week_number=True, year=2024)
+print(fiscal_calendar)
+
+# Save the fiscal calendar for a user defined year to a PDF file
+fc.save_fiscal_calendar_to_pdf(df, columns=3, week_number=True, year=2024, filename="fiscal_calendar_2024.pdf")
+
 ```
 
 ## Key Features
@@ -121,6 +134,44 @@ Here is a data dictionary describing the columns in the generated fiscal calenda
 | 42 | first_fiscal_week_of_fiscal_month_ind     | First fiscal week of the fiscal month indicator - equal to 1 IF fiscal_week_of_month = 1 ELSE equal to 0                                                                                                | <0, 1>                                                                                                            |
 | 43 | last_fiscal_week_of_fiscal_month_ind      | Last fiscal week of the fiscal month indicator - equal to 1 IF fiscal_week_of_month = fiscal_month_number_of_weeks ELSE equal to 0                                                                      | <0, 1>                                                                                                            |
 | 44 | time_day_id_pk_int                        | Integer representation of time_day_id_pk, e.g., 20220130 is represented as 20220130                                                                                                                     | <integer value>                                                                                                   |
+
+## Example Output of Fiscal Calendar of .print_fiscal_calendar(df, columns=3, week_number=True, year=2024) method
+```python
+February FY2024                March FY2024                   April FY2024                
+W | Su Mo Tu We Th Fr Sa       W | Su Mo Tu We Th Fr Sa       W  | Su Mo Tu We Th Fr Sa   
+1 |  4  5  6  7  8  9 10       5 |  3  4  5  6  7  8  9       10 |  7  8  9 10 11 12 13   
+2 | 11 12 13 14 15 16 17       6 | 10 11 12 13 14 15 16       11 | 14 15 16 17 18 19 20   
+3 | 18 19 20 21 22 23 24       7 | 17 18 19 20 21 22 23       12 | 21 22 23 24 25 26 27   
+4 | 25 26 27 28 29  1  2       8 | 24 25 26 27 28 29 30       13 | 28 29 30  1  2  3  4   
+                               9 | 31  1  2  3  4  5  6                                   
+                                                                                          
+
+May FY2024                     June FY2024                    July FY2024                 
+W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa   
+14 |  5  6  7  8  9 10 11      18 |  2  3  4  5  6  7  8      23 |  7  8  9 10 11 12 13   
+15 | 12 13 14 15 16 17 18      19 |  9 10 11 12 13 14 15      24 | 14 15 16 17 18 19 20   
+16 | 19 20 21 22 23 24 25      20 | 16 17 18 19 20 21 22      25 | 21 22 23 24 25 26 27   
+17 | 26 27 28 29 30 31  1      21 | 23 24 25 26 27 28 29      26 | 28 29 30 31  1  2  3   
+                               22 | 30  1  2  3  4  5  6                                  
+                                                                                          
+
+August FY2024                  September FY2024               October FY2024              
+W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa   
+27 |  4  5  6  7  8  9 10      31 |  1  2  3  4  5  6  7      36 |  6  7  8  9 10 11 12   
+28 | 11 12 13 14 15 16 17      32 |  8  9 10 11 12 13 14      37 | 13 14 15 16 17 18 19   
+29 | 18 19 20 21 22 23 24      33 | 15 16 17 18 19 20 21      38 | 20 21 22 23 24 25 26   
+30 | 25 26 27 28 29 30 31      34 | 22 23 24 25 26 27 28      39 | 27 28 29 30 31  1  2   
+                               35 | 29 30  1  2  3  4  5                                  
+                                                                                          
+
+November FY2024                December FY2024                January FY2024              
+W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa   
+40 |  3  4  5  6  7  8  9      44 |  1  2  3  4  5  6  7      49 |  5  6  7  8  9 10 11   
+41 | 10 11 12 13 14 15 16      45 |  8  9 10 11 12 13 14      50 | 12 13 14 15 16 17 18   
+42 | 17 18 19 20 21 22 23      46 | 15 16 17 18 19 20 21      51 | 19 20 21 22 23 24 25   
+43 | 24 25 26 27 28 29 30      47 | 22 23 24 25 26 27 28      52 | 26 27 28 29 30 31  1   
+                               48 | 29 30 31  1  2  3  4                                  
+                                                                                          
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
