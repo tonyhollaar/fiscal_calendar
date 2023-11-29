@@ -61,14 +61,14 @@ df = fc.create_dataframe()
 # Save the DataFrame to a CSV file
 df.to_csv('fiscal_calendar.csv', index=False)
 
-# Pretty print the fiscal calendar for the year 2024
+# Pretty print the table of the fiscal calendar for user defined year (e.g. 2024)
 fc.pretty_print_year(df_date=df, year=2024)
 
-# Print the fiscal calendar for the year 2024
+# Print the fiscal calendar as a grid for user defined year (e.g. 2024)
 fiscal_calendar = fc.print_fiscal_calendar(df, columns=3, week_number=True, year=2024)
 print(fiscal_calendar)
 
-# Save the fiscal calendar for a user defined year to a PDF file
+# Save the fiscal calendar for a user defined year (e.g. 2024) to a PDF file
 fc.save_fiscal_calendar_to_pdf(df, columns=3, week_number=True, year=2024, filename="fiscal_calendar_2024.pdf")
 
 ```
@@ -544,6 +544,9 @@ W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We T
 43 | 24 25 26 27 28 29 30      47 | 22 23 24 25 26 27 28      52 | 26 27 28 29 30 31  1   
                                48 | 29 30 31  1  2  3  4                                  
 ```                                                                                          
+
+### 3.Example Output of method: .save_fiscal_calendar_to_pdf()
+![]()
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
