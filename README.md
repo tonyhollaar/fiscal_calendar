@@ -6,8 +6,8 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/tonyhollaar/fiscal_calendar?style=social)
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/fiscal_calendar_logo.svg"><br>
-  <img src="https://github.com/tonyhollaar/fiscal_calendar/blob/master/img_fiscal_calendar.jpg?raw=true" width="70%" height="70%"><br>
+  <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/img/fiscal_calendar_logo.svg"><br>
+  <img src="https://github.com/tonyhollaar/fiscal_calendar/blob/master/img/img_fiscal_calendar.jpg?raw=true" width="70%" height="70%"><br>
 </div>
 
 # Table of Contents
@@ -546,7 +546,7 @@ W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We Th Fr Sa      W  | Su Mo Tu We T
 ```                                                                                          
 
 ### 3.Example Output of method: .save_fiscal_calendar_to_pdf()
-![Example Output](https://github.com/tonyhollaar/fiscal_calendar/blob/master/example_fiscal_calendar_pdf.png?raw=true)
+![Example Output](https://github.com/tonyhollaar/fiscal_calendar/blob/master/img/example_fiscal_calendar_pdf.png?raw=true)
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
