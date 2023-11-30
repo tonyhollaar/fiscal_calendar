@@ -226,7 +226,15 @@ class FiscalCalendarGenerator:
                                     year: int = None, filename: str = "fiscal_calendar.pdf"):
         """
         Saves a fiscal calendar to a PDF file based on the provided DataFrame.
-        [...]
+
+        Parameters:
+        - df_fiscal_calendar (pd.DataFrame): The DataFrame containing fiscal calendar data.
+        - columns (int): The columns parameter determines the number of columns used to display the fiscal calendar.
+          When set to 3, each fiscal year is presented in a grid layout with 4 rows and 3 columns.
+          This parameter provides a convenient way to control the visual arrangement of the calendar. (default = 3)
+        - week_number (bool): A flag indicating whether to include week numbers in the calendar (default is False).
+        - year (int): The fiscal year for which the calendar is to be generated. If None, it uses the entire DataFrame.
+        - filename (str): The name of the PDF file to be saved (default is "fiscal_calendar.pdf").
         """
         # Generate the fiscal calendar as a string
         fiscal_calendar_str = self.print_fiscal_calendar(df_fiscal_calendar, columns, week_number, year)
