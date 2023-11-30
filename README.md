@@ -1,3 +1,5 @@
+<div align="center">
+
 ![PyPI Version](https://img.shields.io/pypi/v/fiscal-calendar.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Python: 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)
@@ -5,28 +7,29 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/tonyhollaar/fiscal_calendar)
 ![GitHub Repo stars](https://img.shields.io/github/stars/tonyhollaar/fiscal_calendar?style=social)
 
-<div align="center">
+
   <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/img/fiscal_calendar_logo.svg"><br>
   <img src="https://github.com/tonyhollaar/fiscal_calendar/blob/master/img/img_fiscal_calendar.jpg?raw=true" width="70%" height="70%"><br>
-</div>
 
 # Table of Contents
 
-- [Getting Started](#getting-started)
-- [Description](#description)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Key Features](#key-features)
-- [Reference Materials](#reference-materials)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-- [Examples](#examples)
-- [Data Dictionary](#data-dictionary)
+[Getting Started](#getting-started)<br>
+[Description](#description)<br>
+[Installation](#installation)<br>
+[Usage](#usage)<br>
+[Key Features](#key-features)<br>
+[Reference Materials](#reference-materials)<br>
+[License](#license)<br>
+[Acknowledgments](#acknowledgments)<br>
+[Examples](#examples)<br>
+[Data Dictionary](#data-dictionary)<br>
+
+</div>
 
 ## Getting Started
 Welcome to Fiscal Retail Calendar! This section will guide you through the basic steps to get started with the package.
 
-https://github.com/tonyhollaar/fiscal_calendar/assets/121459374/06a1bbd9-e2cb-4091-96b5-fd4197a94689
+<img src="https://github.com/tonyhollaar/fiscal_calendar/assets/121459374/17eb8dd7-828a-4ab9-8181-37e24b01defe.gif" alt="Fiscal Calendar Promo">
 
 ## Description
 The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 4-5-5 week schema, 
