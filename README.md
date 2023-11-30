@@ -26,6 +26,8 @@
 ## Getting Started
 Welcome to Fiscal Retail Calendar! This section will guide you through the basic steps to get started with the package.
 
+https://github.com/tonyhollaar/fiscal_calendar/assets/121459374/06a1bbd9-e2cb-4091-96b5-fd4197a94689
+
 ## Description
 The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 4-5-5 week schema, 
 accommodating a 53rd week every 5 or 6 years, contingent on leap years (i.e., an additional day). 
