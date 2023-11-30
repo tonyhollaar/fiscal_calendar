@@ -15,6 +15,7 @@
 
 [Getting Started](#getting-started)<br>
 [Description](#description)<br>
+[Tutorial](#tutorial)<br>
 [Installation](#installation)<br>
 [Usage](#usage)<br>
 [Key Features](#key-features)<br>
@@ -29,7 +30,7 @@
 ## Getting Started
 Welcome to Fiscal Retail Calendar! This section will guide you through the basic steps to get started with the package.
 
-<img src="https://github.com/tonyhollaar/fiscal_calendar/assets/121459374/17eb8dd7-828a-4ab9-8181-37e24b01defe.gif" alt="Fiscal Calendar Promo">
+<img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/img/fiscal_calendar_promo.gif" alt="Fiscal Calendar Promo">
 
 ## Description
 The Fiscal Retail Calendar is structured based on the 4-5-4 week schema and the 4-5-5 week schema, 
@@ -44,6 +45,12 @@ To rectify this, an additional week (+7 days) is added if the fiscal year-end da
 
 - Fiscal calendar below can be set with dynamic start-date and end-date.
 Currently successfully tested with start-date assumption of 364 days in first year up to dynamic end-date.
+
+## Tutorial
+
+Learn how to use Fiscal Retail Calendar in Google Colab with our tutorial notebook:
+
+- **[Fiscal Retail Calendar Tutorial](notebooks/fiscal_calendar_tutorial.ipynb)**: This notebook provides step-by-step instructions on getting started with the Fiscal Retail Calendar package in Google Colab.
 
 ## Installation
 
