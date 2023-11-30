@@ -7,7 +7,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/tonyhollaar/fiscal_calendar)
 ![GitHub Repo stars](https://img.shields.io/github/stars/tonyhollaar/fiscal_calendar?style=social)
 
-
   <img src="https://raw.githubusercontent.com/tonyhollaar/fiscal_calendar/master/img/fiscal_calendar_logo.svg"><br>
   <img src="https://github.com/tonyhollaar/fiscal_calendar/blob/master/img/img_fiscal_calendar.jpg?raw=true" width="70%" height="70%"><br>
 
@@ -47,6 +46,9 @@ To rectify this, an additional week (+7 days) is added if the fiscal year-end da
 Currently successfully tested with start-date assumption of 364 days in first year up to dynamic end-date.
 
 ## Tutorial
+<a target="_blank" href="https://colab.research.google.com/github/tonyhollaar/fiscal_calendar/blob/master/notebooks/fiscal_calendar_tutorial.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 Learn how to use Fiscal Retail Calendar in Google Colab with our tutorial notebook:
 
