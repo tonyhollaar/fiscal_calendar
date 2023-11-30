@@ -40,7 +40,8 @@ In this fiscal calendar, we assume 364 days in a standard year or 371 days in a 
 exemplified in years such as 2006, 2012, 2017, 2023 (totaling 371 days), the code also considers leap years. 
 The 53rd week adjusts for the fact that each fiscal year comprises 364 days versus the standard ~365 days. 
 Consequently, the fiscal start date for each subsequent year begins either -1 day earlier or -2 days earlier in the case of a leap year. 
-To rectify this, an additional week (+7 days) is added if the fiscal year-end date is before January 28th, which is >-4 days from 01-31-year. Conn's fiscal year concludes on the last Saturday of the fiscal month, and the new fiscal start date commences on Sunday.
+To rectify this, an additional week (+7 days) is added if the fiscal year-end date is before January 28th, which is >-4 days from 01-31-year. 
+- A fiscal year concludes on the last Saturday of the fiscal month, and the new fiscal start date commences on Sunday.
 
 - Fiscal calendar below can be set with dynamic start-date and end-date.
 Currently successfully tested with start-date assumption of 364 days in first year up to dynamic end-date.
